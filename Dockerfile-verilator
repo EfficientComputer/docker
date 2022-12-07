@@ -14,5 +14,5 @@ RUN zypper --non-interactive install \
 		python3 perl perl-doc gperftools-devel
 RUN git clone https://github.com/verilator/verilator
 RUN cd verilator && git pull && git checkout stable
-RUN cd verilator && autoconf && ./configure && make -j16 && make install
+RUN cd verilator && autoconf && ./configure && make -j && make install
 

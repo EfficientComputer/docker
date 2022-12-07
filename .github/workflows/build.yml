@@ -1,24 +1,42 @@
 name: Build
 on: 
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    push:
+        branches: [ main ]
+    pull_request:
+        branches: [ main ]
 
 jobs:
-  build-effsuse-verilator:
-    runs-on: self-hosted # ubuntu-latest
-    container: 
-      image: docker 
-    steps:
-    - uses: actions/checkout@v2
-    - name: Login to GitHub Container Registry
-      uses: docker/login-action@v2
-      with: 
-        registry: ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-    - name: Build effsuse-verilator
-      run: |
-        docker build . --file Dockerfile-verilator --tag ghcr.io/efficientcomputer/effsuse-verilator:latest
-        docker push ghcr.io/efficientcomputer/effsuse-verilator:latest
+    build-effsuse-verilator:
+        runs-on: ubuntu-latest
+        container: 
+            image: docker 
+        steps:
+        - uses: actions/checkout@v2
+        - name: Login to GitHub Container Registry
+            uses: docker/login-action@v2
+            with: 
+                registry: ghcr.io
+                username: ${{ github.actor }}
+                password: ${{ secrets.GITHUB_TOKEN }}
+        - name: Build effsuse-verilator
+            run: |
+                docker build . --file Dockerfile-verilator \
+                    --tag ghcr.io/efficientcomputer/effsuse-verilator:latest
+                docker push ghcr.io/efficientcomputer/effsuse-verilator:latest
+    build-effsuse-compiler:
+        runs-on: ubuntu-latest
+        container: 
+            image: docker 
+        steps:
+        - uses: actions/checkout@v2
+        - name: Login to GitHub Container Registry
+            uses: docker/login-action@v2
+            with: 
+                registry: ghcr.io
+                username: ${{ github.actor }}
+                password: ${{ secrets.GITHUB_TOKEN }}
+        - name: Build effsuse-compiler
+            run: |
+                docker build . --file Dockerfile-compiler \
+                    --tag ghcr.io/efficientcomputer/effsuse-compiler:latest
+                docker push ghcr.io/efficientcomputer/effsuse-compiler:latest
