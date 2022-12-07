@@ -20,5 +20,5 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
     - name: Build effsuse
       run: |
-        docker build . --tag ghcr.io/EfficientComputer/effsuse:latest
-        docker push ghcr.io/EfficientComputer/effsuse:latest
+        docker build . --tag ghcr.io/efficientcomputer/effsuse:latest
+        docker push ghcr.io/efficientcomputer/effsuse:latest
