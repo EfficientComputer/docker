@@ -6,8 +6,8 @@ on:
     branches: [ main ]
 
 jobs:
-  build-effsuse:
-    runs-on: ubuntu-latest
+  build-effsuse-verilator:
+    runs-on: self-hosted # ubuntu-latest
     container: 
       image: docker 
     steps:
@@ -18,7 +18,7 @@ jobs:
         registry: ghcr.io
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
-    - name: Build effsuse
+    - name: Build effsuse-verilator
       run: |
-        docker build . --tag ghcr.io/efficientcomputer/effsuse:latest
-        docker push ghcr.io/efficientcomputer/effsuse:latest
+        docker build . --file Dockerfile-verilator --tag ghcr.io/efficientcomputer/effsuse-verilator:latest
+        docker push ghcr.io/efficientcomputer/effsuse-verilator:latest
