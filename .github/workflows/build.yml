@@ -19,7 +19,6 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
     - name: Build effsuse
-      shell: bash
       run: |
         docker build . --tag ghcr.io/EfficientComputer/effsuse:latest
         docker push ghcr.io/EfficientComputer/effsuse:latest
