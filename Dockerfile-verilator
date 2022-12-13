@@ -12,7 +12,8 @@ RUN zypper --non-interactive refresh && \
 RUN zypper --non-interactive install \
 		autoconf gcc gcc-c++ flex bison ccache numactl \
 		python3 perl perl-doc gperftools-devel
-RUN git clone https://github.com/verilator/verilator
-RUN cd verilator && git pull && git checkout stable
-RUN cd verilator && autoconf && ./configure && make -j && make install
+RUN git clone https://github.com/verilator/verilator && \
+        cd verilator && git pull && git checkout stable && \
+        autoconf && ./configure && make -j`nproc` && \
+        make install && rm -rf /verilator
 
